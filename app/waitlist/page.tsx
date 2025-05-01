@@ -1,10 +1,10 @@
 import React from 'react'
-import Onboarding from '@/components/onboarding/onboarding-screen'
+import Waitlist from '@/components/waitlist'
 
 const page = () => {
   return (
     <div className=''>
-      <Onboarding />
+      <Waitlist />
     </div>
   )
 }
