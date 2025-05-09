@@ -4,13 +4,17 @@ import React, { useEffect } from 'react'
 
 function OnComplete() {
   const router = useRouter();
-
+  let timer: ReturnType<typeof setTimeout>;
   useEffect(() => {
-    let timer;
+
     timer = setTimeout(() => {
       router.replace("/theraphy-hub")
     }, 3000)
-  }, [])
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [router])
   return (
     <div className="w-full max-w-[51.875rem] h-[29.875rem] mx-auto p-8 bg-[#EDEDED1A] rounded-3xl text-center flex justify-center items-center">
       <div className="flex flex-col items-center justify-center space-y-6">

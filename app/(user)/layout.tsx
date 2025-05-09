@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poly } from "next/font/google";
 
@@ -39,7 +39,7 @@ export default function UserDashboardLayout({
             <SidebarProvider>
                 <AppSidebar />
                 <main className="w-full bg-sidebar-bg" >
-                    {/* <SidebarTrigger /> */}
+                    {/* /> */}
                     {children}
                 </main>
             </SidebarProvider>
