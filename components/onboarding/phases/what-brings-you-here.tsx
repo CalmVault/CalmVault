@@ -8,7 +8,7 @@ import {
 } from "@/data/select-options";
 import Image from "next/image";
 
-type SupportOption = string;
+
 
 interface QuestionOption {
   id: string;
