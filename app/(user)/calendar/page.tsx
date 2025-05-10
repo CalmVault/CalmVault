@@ -1,10 +1,12 @@
+import CalendarComponent from '@/components/user/calendar/calendar-ui'
+
+
+
 const Calendar = () => {
     return (
-        <>
-            <div className="w-full min-h-screen px-6" >
-                <h1 className=" text-white">Calendar</h1>
-            </div>
-        </>
+        <div className=' h-screen overflow-auto'>
+        <CalendarComponent />
+        </div>
     );
 }
 
