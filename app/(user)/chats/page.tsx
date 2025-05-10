@@ -1,9 +1,11 @@
+import Chat from '@/components/user/chat/chat'
+
 const Chats = () => {
     return (
         <>
-            <div className="w-full min-h-screen px-6" >
-                <h1 className=" text-white">Chats</h1>
-            </div>
+    <div>
+        <Chat />
+    </div>
         </>
     );
 }

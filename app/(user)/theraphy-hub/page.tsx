@@ -1,8 +1,10 @@
+import Therapy from '@/components/user/therapy-hub/therapy-hub'
+
 const TheraphyHub = () => {
     return (
         <>
-            <div className="w-full min-h-screen px-6" >
-                <h1 className=" text-white">TheraphyHub</h1>
+            <div className="w-full h-screen overflow-auto" >
+               <Therapy />
             </div>
         </>
     );
