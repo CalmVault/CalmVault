@@ -1,8 +1,10 @@
+import NotificationComponent from "@/components/user/notification/notification";
 const Notification = () => {
     return (
         <>
-            <div className="w-full min-h-screen px-6" >
-                <h1 className=" text-white">Notification</h1>
+
+            <div className=' h-screen overflow-auto'>
+                <NotificationComponent />
             </div>
         </>
     );
