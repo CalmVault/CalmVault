@@ -31,20 +31,20 @@ const TheraphistPreferences = () => {
             value: "evening"
         }
     ]
-    const timeZones = [
-        {
-            label: "GMT +1",
-            value: "gmt+1"
-        },
-        {
-            label: "GMT -1",
-            value: "gmt-1"
-        },
-        {
-            label: "UTC +1",
-            value: "utc+1"
-        }
-    ]
+    // const timeZones = [
+    //     {
+    //         label: "GMT +1",
+    //         value: "gmt+1"
+    //     },
+    //     {
+    //         label: "GMT -1",
+    //         value: "gmt-1"
+    //     },
+    //     {
+    //         label: "UTC +1",
+    //         value: "utc+1"
+    //     }
+    // ]
     return (
         <>
             <div className="w-full mt-5">

@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import CustomSelect from "@/components/ui/custom-select";
 const PaymentSettings = () => {
     const paymentOptions = [
