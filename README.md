@@ -55,4 +55,4 @@ We welcome contributions! Feel free to:
 - **Create pull requests** for improvements.
 - **Join discussions** on privacy-focused mental health solutions.
 
-
+👉 Please read our [Contributing Guidelines](./CONTRIBUTING.md) before getting started.
