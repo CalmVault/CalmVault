@@ -17,10 +17,11 @@ export default function Faq() {
   const [faqData, setFaqData] = useState<FaqTopic[]>([]);
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
   const [activeQuestion, setActiveQuestion] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    // Simulate fetching data from backend API
     const fetchFaqData = async () => {
+      setLoading(true);
       const response = await new Promise<FaqTopic[]>((resolve) =>
         setTimeout(() => {
           resolve([
@@ -153,6 +154,7 @@ export default function Faq() {
           setActiveQuestion(response[0].questions[0].question);
         }
       }
+      setLoading(false);
     };
 
     fetchFaqData();
@@ -194,50 +196,62 @@ export default function Faq() {
           <div className="w-full text-center">Frequently Asked Questions</div>
         </h1>
 
-        <div className="flex justify-between items-center p-[20px] flex-wrap gap-4 mt-6">
-          {faqData.map((item, index) => (
-            <button
-              className={`${
-                activeTopic === item.topic
-                  ? "bg-[#00A6A61A] border-b border-[#00A6A6]"
-                  : "bg-transparent"
-              } text-white outline-none text-[16px] font-[600] px-[20px] py-[10px] transition-all duration-300 hover:bg-[#00A6A61A]/10`}
-              key={index}
-              onClick={() => toggleTopic(item.topic)}
-            >
-              {item.topic}
-            </button>
-          ))}
-        </div>
-
-        {activeTopic && selectedTopicData && (
-          <div className="flex w-full px-20 mt-30">
-            <div className="flex flex-col w-full border-r-[5px] border-[#2A2A2A] pr-10">
-              {selectedTopicData.questions.map((q, qIndex) => (
+        {loading ? (
+          <div className="text-white text-center mt-10 text-[18px] font-[500]">
+            Loading FAQs...
+          </div>
+        ) : faqData.length === 0 ? (
+          <div className="text-white text-center mt-10 text-[18px] font-[500]">
+            No FAQ topics found.
+          </div>
+        ) : (
+          <>
+            <div className="flex justify-between items-center p-[20px] flex-wrap gap-4 mt-6">
+              {faqData.map((item, index) => (
                 <button
-                  key={qIndex}
                   className={`${
-                    activeQuestion === q.question
-                      ? "bg-[#6A57D01A]/10"
+                    activeTopic === item.topic
+                      ? "bg-[#00A6A61A] border-b border-[#00A6A6]"
                       : "bg-transparent"
-                  } text-white text-start outline-none text-[16px] font-[400] p-[20px] transition-all duration-300`}
-                  onClick={() => toggleQuestion(q.question)}
+                  } text-white outline-none text-[16px] font-[600] px-[20px] py-[10px] transition-all duration-300 hover:bg-[#00A6A61A]/10`}
+                  key={index}
+                  onClick={() => toggleTopic(item.topic)}
                 >
-                  {q.question}
+                  {item.topic}
                 </button>
               ))}
             </div>
 
-            {selectedQuestion && (
-              <div className="w-full text-white px-20 mt-10 max-h-390 overflow-y-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-                {selectedQuestion.answer.map((ans, i) => (
-                  <p key={i} className="max-w-[500px] text-start mb-8 ">
-                    {ans}
-                  </p>
-                ))}
+            {activeTopic && selectedTopicData && (
+              <div className="flex w-full px-20 mt-30">
+                <div className="flex flex-col w-full border-r-[5px] border-[#2A2A2A] pr-10">
+                  {selectedTopicData.questions.map((q, qIndex) => (
+                    <button
+                      key={qIndex}
+                      className={`${
+                        activeQuestion === q.question
+                          ? "bg-[#6A57D01A]/10"
+                          : "bg-transparent"
+                      } text-white text-start outline-none text-[16px] font-[400] p-[20px] transition-all duration-300`}
+                      onClick={() => toggleQuestion(q.question)}
+                    >
+                      {q.question}
+                    </button>
+                  ))}
+                </div>
+
+                {selectedQuestion && (
+                  <div className="w-full text-white px-20 mt-10 max-h-390 overflow-y-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+                    {selectedQuestion.answer.map((ans, i) => (
+                      <p key={i} className="max-w-[500px] text-start mb-8 ">
+                        {ans}
+                      </p>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
-          </div>
+          </>
         )}
       </div>
     </div>
