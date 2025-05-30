@@ -1,7 +1,12 @@
-import React from 'react';
-import { therapists } from '@/data/mock-data';
-import Image from 'next/image';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import React from "react";
+import { therapists } from "@/data/mock-data";
+import Image from "next/image";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface TherapistCardProps {
   id: number | string;
@@ -10,33 +15,41 @@ interface TherapistCardProps {
 
 const TherapistCard: React.FC<TherapistCardProps> = ({
   id,
-  onClick = null
+  onClick = null,
 }) => {
   // Find the therapist data by id from the imported data
-  const therapistData = therapists.find(therapist => therapist.id === id);
-  
+  const therapistData = therapists.find((therapist) => therapist.id === id);
+
   if (!therapistData) {
     return null; // Return nothing if therapist not found
   }
-  
+
   const { name, rating, imageUrl } = therapistData;
-  
+
   // Generate star rating display (filled and empty stars)
   const renderStars = () => {
     const stars = [];
     const maxRating = 5;
-    
+
     for (let i = 1; i <= maxRating; i++) {
       if (i <= rating) {
-        stars.push(<span key={i} className="text-yellow-500">★</span>);
+        stars.push(
+          <span key={i} className="text-yellow-500">
+            ★
+          </span>
+        );
       } else {
-        stars.push(<span key={i} className="text-gray-400">☆</span>);
+        stars.push(
+          <span key={i} className="text-gray-400">
+            ☆
+          </span>
+        );
       }
     }
-    
+
     return <div className="flex justify-center mt-1">{stars}</div>;
   };
-  
+
   return (
     <TooltipProvider>
       <Tooltip>
