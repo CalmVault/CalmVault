@@ -6,7 +6,7 @@ import {
   SidebarGroup,
   SidebarHeader,
 } from "@/components/ui/sidebar"
-import { LogOut } from "lucide-react";
+import { LogOut, Vote } from "lucide-react";
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -40,6 +40,12 @@ const sideBarLinks = [
     activeIcon: "/settings-active-icon.svg",
     title: "Settings",
     routePath: "/settings"
+  },
+  {
+    icon: "dao-governance",
+    activeIcon: "dao-governance-active",
+    title: "DAO Governance",
+    routePath: "/dao-governance"
   },
   {
     icon: "/profile-icon.svg",
@@ -79,7 +85,15 @@ export function AppSidebar() {
                   route.push(routePath)
                 }}
                 className="w-full cursor-pointer mb-6" >
-                <Image src={isActive ? activeIcon : icon} alt={title} width={24} height={24} />
+                
+                {title === "DAO Governance" ? (
+                  <Vote 
+                    size={24} 
+                    color={isActive ? "#00A6A6" : "#EDEDED"} 
+                  />
+                ) : (
+                  <Image src={isActive ? activeIcon : icon} alt={title} width={24} height={24} />
+                )}
 
                 <p className={`text-sm font-normal mt-1.5 ${isActive ? "text-[#00A6A6]" : "text-white"} cursor-pointer `} >{title}</p>
               </div>
