@@ -8,11 +8,7 @@ import QuoteCard from "./quote";
 import ChatPrompt from "./chat-prompt";
 import ChatInterface from "./ai-chat";
 import TherapistProfile from "./therapist-profile";
-import {
-  chatPrompts,
-  therapists,
-  journalEntries,
-} from "@/data/mock-data";
+import { chatPrompts, therapists, journalEntries } from "@/data/mock-data";
 import { Button } from "@/components/ui/button";
 
 interface SectionHeaderProps {
@@ -45,7 +41,9 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
 const TherapyHub = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [chatPromptText, setChatPromptText] = useState("");
-  const [selectedTherapistId, setSelectedTherapistId] = useState<string | null>(null);
+  const [selectedTherapistId, setSelectedTherapistId] = useState<string | null>(
+    null
+  );
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const handleStartSession = () => {
@@ -87,7 +85,7 @@ const TherapyHub = () => {
 
   const handleChatPromptClick = (promptId: string | number) => {
     console.log(`Selected chat prompt ID: ${promptId}`);
-    const prompt = chatPrompts.find(p => p.id === promptId);
+    const prompt = chatPrompts.find((p) => p.id === promptId);
     if (prompt) {
       setChatPromptText(prompt.question);
       setIsChatOpen(true);
