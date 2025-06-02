@@ -2,6 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 interface TherapySessionSidebarProps {
   title?: string;
@@ -24,6 +25,8 @@ const TherapySessionSidebar: React.FC<TherapySessionSidebarProps> = ({
   onStartSession, // Accept both prop names
   onHelpClick,
 }) => {
+  const router = useRouter();
+
   const handleButtonClick = () => {
     console.log("Button clicked in sidebar");
     
@@ -41,6 +44,7 @@ const TherapySessionSidebar: React.FC<TherapySessionSidebarProps> = ({
     if (onHelpClick) {
       onHelpClick();
     }
+    router.push('/faq');
   };
 
   return (

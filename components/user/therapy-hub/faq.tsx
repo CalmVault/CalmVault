@@ -2,6 +2,7 @@
 import { ChevronLeft } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type FaqAnswer = string[];
 type FaqQuestion = {
@@ -13,11 +14,16 @@ type FaqTopic = {
   questions: FaqQuestion[];
 };
 
-export default function Faq() {
+interface FaqProps {
+  onBackClick?: () => void;
+}
+
+export default function Faq({ onBackClick }: FaqProps) {
   const [faqData, setFaqData] = useState<FaqTopic[]>([]);
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
   const [activeQuestion, setActiveQuestion] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchFaqData = async () => {
@@ -183,6 +189,14 @@ export default function Faq() {
     (q) => q.question === activeQuestion
   );
 
+    const handleBackClick = () => {
+    if (onBackClick) {
+      onBackClick();
+    } else {
+      router.back();
+    }
+  };
+
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-[#320157] via-[#051109] to-[#032c0f] px-[150px] py-[150px]">
       <div className="flex justify-center items-center mb-10">
@@ -190,12 +204,16 @@ export default function Faq() {
       </div>
       <div className="relative">
         <h1 className="text-[36px] font-[700] px-[20px] text-[#EDEDED] text-center">
-          <div className="absolute">
+          <button 
+            className="absolute left-0 top-0"
+            onClick={handleBackClick}
+          >
             <ChevronLeft size={28} color="white" />
-          </div>
+          </button>
           <div className="w-full text-center">Frequently Asked Questions</div>
         </h1>
 
+        {/* Rest of your component remains the same */}
         {loading ? (
           <div className="text-white text-center mt-10 text-[18px] font-[500]">
             Loading FAQs...
