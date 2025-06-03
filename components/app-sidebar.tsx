@@ -14,25 +14,37 @@ const sideBarLinks = [
   {
     icon: "/physio-therapist.svg",
     activeIcon: "/physio-therapist-active.svg",
-    title: "Theraphy Hub",
+    title: "Sessions",
     routePath: "/theraphy-hub"
   },
   {
     icon: "/chat-icon.svg",
     activeIcon: "/chat-active-icon.svg",
-    title: "Chats",
+    title: "Clients",
     routePath: "/chats"
   },
-  {
+    {
+    icon: "/group-icon.svg",
+    activeIcon: "/notification-active-icon.svg",
+    title: "Earnings",
+    routePath: "/notification"
+  },
+      {
+    icon: "/material-light-icon.svg",
+    activeIcon: "/material-light-active-icon.svg",
+    title: "Reputation Score",
+    routePath: "/reputation-score"
+  },
+    {
     icon: "/calendar-icon.svg",
     activeIcon: "/calendar-active-icon.svg",
     title: "Calendar",
     routePath: "/calendar"
   },
-  {
-    icon: "/notification-icon.svg",
+    {
+    icon: "/governance-tracked-icon.svg",
     activeIcon: "/notification-active-icon.svg",
-    title: "Notification",
+    title: "DAO Governance",
     routePath: "/notification"
   },
   {
