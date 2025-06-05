@@ -57,6 +57,12 @@ const sideBarLinks = [
     routePath: "/settings",
   },
   {
+    icon: "/dao-icon.svg",
+    activeIcon: "/dao-icon.svg",
+    title: "DAO Governance",
+    routePath: "/dao-governance",
+  },
+  {
     icon: "/profile-icon.svg",
     activeIcon: "/profile-active-icon.svg",
     title: "Profile",
