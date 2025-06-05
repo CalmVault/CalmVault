@@ -21,7 +21,7 @@ const sideBarLinks = [
     icon: "/chat-icon.svg",
     activeIcon: "/chat-active-icon.svg",
     title: "Chats",
-    routePath: "/chats"
+    routePath: "/earnings"
   },
   {
     icon: "/calendar-icon.svg",
