@@ -1,109 +1,82 @@
-"use client"
+"use client";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 import { LogOut } from "lucide-react";
-import Image from "next/image"
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-const sideBarLinks = [
-  {
-    icon: "/physio-therapist.svg",
-    activeIcon: "/physio-therapist-active.svg",
-    title: "Sessions",
-    routePath: "/theraphy-hub"
-  },
-  {
-    icon: "/chat-icon.svg",
-    activeIcon: "/chat-active-icon.svg",
-    title: "Clients",
-    routePath: "/chats"
-  },
-    {
-    icon: "/group-icon.svg",
-    activeIcon: "/notification-active-icon.svg",
-    title: "Earnings",
-    routePath: "/notification"
-  },
-      {
-    icon: "/material-light-icon.svg",
-    activeIcon: "/material-light-active-icon.svg",
-    title: "Reputation Score",
-    routePath: "/reputation-score"
-  },
-    {
-    icon: "/calendar-icon.svg",
-    activeIcon: "/calendar-active-icon.svg",
-    title: "Calendar",
-    routePath: "/calendar"
-  },
-    {
-    icon: "/governance-tracked-icon.svg",
-    activeIcon: "/notification-active-icon.svg",
-    title: "DAO Governance",
-    routePath: "/notification"
-  },
-  {
-    icon: "/settings-icon.svg",
-    activeIcon: "/settings-active-icon.svg",
-    title: "Settings",
-    routePath: "/settings"
-  },
-  {
-    icon: "/profile-icon.svg",
-    activeIcon: "/profile-active-icon.svg",
-    title: "Profile",
-    routePath: "/profile"
-  },
-]
-export function AppSidebar() {
 
 
-  const route = useRouter()
+type SideBarLink = {
+  icon: string;
+  activeIcon: string;
+  title: string;
+  routePath: string;
+};
+
+type SideBarLinksProps = {
+  sideBarLinks: SideBarLink[];
+};
+
+export function AppSidebar({ sideBarLinks }: SideBarLinksProps) {
+  const route = useRouter();
   const pathname = usePathname();
   const [activeItem, setActiveItem] = useState("");
 
   useEffect(() => {
-    const sortedMenuItems = [...sideBarLinks].sort((a, b) => b.routePath.length - a.routePath.length);
-    const current = sortedMenuItems.find((item) => pathname?.startsWith(item.routePath));
+    const sortedMenuItems = [...sideBarLinks].sort(
+      (a, b) => b.routePath.length - a.routePath.length
+    );
+    const current = sortedMenuItems.find((item) =>
+      pathname?.startsWith(item.routePath)
+    );
     if (current) {
       setActiveItem(current.title);
     }
   }, [pathname]);
   return (
-    <Sidebar className=" py-16 px-6 relative" >
+    <Sidebar className=" py-16 px-6 relative">
       <SidebarHeader>
         <Image src={"/logo-with-text.svg"} width={168} height={45} alt="logo" />
       </SidebarHeader>
       <SidebarContent className="w-full  flex flex-col gap-6 mt-12 px-4">
-        <SidebarGroup >
+        <SidebarGroup>
           {sideBarLinks.map(({ title, icon, routePath, activeIcon }, index) => {
             const isActive = activeItem === title;
             return (
-
               <div
                 key={index}
                 onClick={() => {
-                  route.push(routePath)
+                  route.push(routePath);
                 }}
-                className="w-full cursor-pointer mb-6" >
-                <Image src={isActive ? activeIcon : icon} alt={title} width={24} height={24} />
+                className="w-full cursor-pointer mb-6"
+              >
+                <Image
+                  src={isActive ? activeIcon : icon}
+                  alt={title}
+                  width={24}
+                  height={24}
+                />
 
-                <p className={`text-sm font-normal mt-1.5 ${isActive ? "text-[#00A6A6]" : "text-white"} cursor-pointer `} >{title}</p>
+                <p
+                  className={`text-sm font-normal mt-1.5 ${isActive ? "text-[#00A6A6]" : "text-white"} cursor-pointer `}
+                >
+                  {title}
+                </p>
               </div>
-
-            )
+            );
           })}
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className=" my-6 px-12  absolute bottom-0 w-full left-0"  >
+      <SidebarFooter className=" my-6 px-12  absolute bottom-0 w-full left-0">
         <LogOut color="#EDEDED" className=" rotate-180" size={20} />
-        <p className="mt-1 text-sm text-[#EDEDED]" >Log out</p>
+        <p className="mt-1 text-sm text-[#EDEDED]">Log out</p>
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
