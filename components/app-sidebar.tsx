@@ -10,48 +10,22 @@ import { LogOut } from "lucide-react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-const sideBarLinks = [
-  {
-    icon: "/physio-therapist.svg",
-    activeIcon: "/physio-therapist-active.svg",
-    title: "Theraphy Hub",
-    routePath: "/theraphy-hub"
-  },
-  {
-    icon: "/chat-icon.svg",
-    activeIcon: "/chat-active-icon.svg",
-    title: "Chats",
-    routePath: "/chats"
-  },
-  {
-    icon: "/calendar-icon.svg",
-    activeIcon: "/calendar-active-icon.svg",
-    title: "Calendar",
-    routePath: "/calendar"
-  },
-  {
-    icon: "/notification-icon.svg",
-    activeIcon: "/notification-active-icon.svg",
-    title: "Notification",
-    routePath: "/notification"
-  },
-  {
-    icon: "/settings-icon.svg",
-    activeIcon: "/settings-active-icon.svg",
-    title: "Settings",
-    routePath: "/settings"
-  },
-  {
-    icon: "/profile-icon.svg",
-    activeIcon: "/profile-active-icon.svg",
-    title: "Profile",
-    routePath: "/profile"
-  },
-]
-export function AppSidebar() {
 
 
-  const route = useRouter()
+type SidebarLink = {
+  icon: string;
+  activeIcon: string;
+  title: string;
+  routePath: string;
+};
+
+
+interface AppSidebarProps {
+  sideBarLinks: SidebarLink[];
+}
+
+export function AppSidebar({ sideBarLinks }: AppSidebarProps) {
+  const route = useRouter();
   const pathname = usePathname();
   const [activeItem, setActiveItem] = useState("");
 
@@ -65,7 +39,8 @@ export function AppSidebar() {
     if (current) {
       setActiveItem(current.title);
     }
-  }, [pathname]);
+  }, [pathname, sideBarLinks]);
+
   return (
     <Sidebar className=" py-16 px-6 relative">
       <SidebarHeader>
@@ -89,9 +64,10 @@ export function AppSidebar() {
                   width={24}
                   height={24}
                 />
-
                 <p
-                  className={`text-sm font-normal mt-1.5 ${isActive ? "text-[#00A6A6]" : "text-white"} cursor-pointer `}
+                  className={`text-sm font-normal mt-1.5 ${
+                    isActive ? "text-[#00A6A6]" : "text-white"
+                  } cursor-pointer `}
                 >
                   {title}
                 </p>
