@@ -23,6 +23,7 @@ export default function EarningsDashboard() {
       try {
         setIsLoading(true);
         // In a real app, this would be an API call
+        // this code can be remove when you want to add the api it just a simulation
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         // Dummy data based on the screenshot
