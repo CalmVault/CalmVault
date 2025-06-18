@@ -29,8 +29,8 @@ const sideBarLinks = [
   {
     icon: "/physio-therapist.svg",
     activeIcon: "/physio-therapist-active.svg",
-    title: "Theraphy Hub",
-    routePath: "/theraphy-hub",
+    title: "Therapy Hub",
+    routePath: "/therapy-hub",
   },
   {
     icon: "/chat-icon.svg",
