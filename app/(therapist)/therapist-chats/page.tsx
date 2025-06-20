@@ -1,5 +1,7 @@
+import TherapistChatPage from "@/components/therapist-chat/Therapist-chat-page";
+
 function page() {
-  return <div>page</div>;
+  return <TherapistChatPage />;
 }
 
 export default page;
