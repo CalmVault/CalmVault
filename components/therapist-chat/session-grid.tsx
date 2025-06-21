@@ -1,14 +1,6 @@
-"use client";
-
-import { Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import type {
-  SessionData,
-  SessionGridProps,
-  SessionCardProps,
-  SessionItem,
-} from "@/types/chat";
+import { SessionCard } from "./session-card";
+import { EmptySessionsState } from "./empty-sessions-state";
+import type { SessionData, SessionGridProps } from "@/types/chat";
 
 // Enhanced session data with proper typing
 const sessionData: SessionData[] = [
@@ -193,7 +185,6 @@ const sessionData: SessionData[] = [
     lastMessage: "Self-awareness is the first step to growth. Well done!",
     lastMessageTime: "11:45 AM",
   },
-  // Additional sessions for scrolling demonstration
   {
     id: "anon-007",
     feedback: "4.6 / 5.0",
@@ -254,94 +245,46 @@ const sessionData: SessionData[] = [
   },
 ];
 
-// Session grid with vertical scrolling capability
+// Main session grid component with conditional rendering
 export function SessionGrid({ onViewChat }: SessionGridProps) {
+  // For demo purposes, you can change this to [] to see the empty state
+  const hasSessions = sessionData.length > 0;
+
   return (
     <div className="h-screen bg-[#272727] flex flex-col">
       {/* Header section - fixed at top */}
       <div className="flex-shrink-0 p-6 border-b border-gray-700">
         <h1 className="text-2xl font-bold text-white mb-2">Therapy Sessions</h1>
         <p className="text-gray-400">
-          View and manage your anonymous therapy sessions
+          {hasSessions
+            ? "View and manage your anonymous therapy sessions"
+            : "Your anonymous therapy sessions will appear here"}
         </p>
       </div>
 
-      {/* Scrollable content area */}
-      <div className="flex-1 overflow-y-auto">
-        <div className="container mx-auto p-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {sessionData.map((session) => (
-              <SessionCard
-                key={session.id}
-                session={session}
-                onViewMore={() => onViewChat(session)}
-              />
-            ))}
-          </div>
-
-          {/* Bottom spacing for better scrolling experience */}
-          <div className="h-6"></div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Session card with consistent height and proper button positioning
-function SessionCard({ session, onViewMore }: SessionCardProps) {
-  return (
-    <Card className="bg-[#3b3b3b] border-gray-400 p-6 flex flex-col h-[400px] hover:bg-gray-750 transition-colors duration-200">
-      {/* Session header */}
-      <div className="flex items-center justify-between ">
-        <h3 className="text-white font-medium text-xl">
-          Anonymous ID : {session.id}
-        </h3>
-        <span className="bg-[#5f5f5f] text-gray-300 px-2 py-1  text-xs rounded-xl">
-          Messaging only
-        </span>
-      </div>
-
-      {/* Feedback rating */}
-      <div className="flex items-center space-x-2 ">
-        <Star className="w-4 h-4 text-yellow-400 fill-current" />
-        <span className="text-gray-300 text-sm">
-          Feedback: {session.feedback} - Verified
-        </span>
-      </div>
-
-      {/* Session history - scrollable if content is too long */}
-      <div className="flex-1 mb-4 min-h-0">
-        <h4 className="text-gray-300 font-medium mb-2">
-          Session History (Summary Only)
-        </h4>
-        <div className="space-y-2 max-h-32 overflow-y-auto">
-          {session.sessions.map((sessionItem: SessionItem, index: number) => (
-            <div key={index} className="text-gray-400 text-sm">
-              • {sessionItem.date} - {sessionItem.duration} -{" "}
-              {sessionItem.topic}
+      {/* Conditional content based on sessions availability */}
+      {hasSessions ? (
+        /* Scrollable content area with sessions */
+        <div className="flex-1 overflow-y-auto">
+          <div className="container mx-auto p-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              {sessionData.map((session) => (
+                <SessionCard
+                  key={session.id}
+                  session={session}
+                  onViewMore={() => onViewChat(session)}
+                />
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Last message preview */}
-        <div className="mt-3 p-3 bg-[#5f5f5f] rounded-lg">
-          <p className="text-gray-300  text-xs mb-1">Last message:</p>
-          <p className="text-gray-300 text-sm line-clamp-2">
-            &quot;{session.lastMessage}&quot;
-          </p>
-          <p className="text-gray-300  text-xs mt-2">
-            {session.lastMessageTime}
-          </p>
+            {/* Bottom spacing for better scrolling experience */}
+            <div className="h-6"></div>
+          </div>
         </div>
-      </div>
-
-      {/* View More button - always at bottom */}
-      <Button
-        onClick={onViewMore}
-        className="w-full bg-[#5f5f5f] hover:bg-[#757575] border border-[#EDEDEDB2] text-white mt-auto transition-colors duration-200 cursor-pointer"
-      >
-        View More
-      </Button>
-    </Card>
+      ) : (
+        /* Empty state when no sessions exist */
+        <EmptySessionsState />
+      )}
+    </div>
   );
 }
