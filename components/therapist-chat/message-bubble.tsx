@@ -188,8 +188,8 @@ export function MessageBubble({
           {/* Show original message being replied to */}
           {repliedMessage && (
             <div
-              className={`mb-2 p-2 rounded-lg bg-gray-600/50 border-l-2 ${
-                isUser ? "border-blue-400" : "border-teal-400"
+              className={`mb-1 p-2 rounded-lg bg-gray-6050 border-l-2 ${
+                isUser ? "bg-[#1b5858]" : "bg-[#263636]"
               }`}
             >
               <p className="text-xs text-gray-400 mb-1">
@@ -210,7 +210,7 @@ export function MessageBubble({
             <div
               className={`p-3 rounded-lg ${
                 isUser
-                  ? "bg-blue-600 text-white rounded-br-sm"
+                  ? "bg-[#263636] text-white rounded-br-sm"
                   : "bg-gray-700 text-gray-100 rounded-bl-sm"
               }`}
             >

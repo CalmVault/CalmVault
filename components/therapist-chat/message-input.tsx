@@ -29,7 +29,7 @@ export function MessageInput({
           onChange={(e) => onChange(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="Your Message"
-          className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 pr-10 sm:pr-12 rounded-2xl text-sm sm:text-base py-3 sm:py-4 h-12 sm:h-14"
+          className="bg-[#555555] border-gray-100 text-white placeholder-gray-400 pr-10 sm:pr-12 rounded-2xl text-sm sm:text-base py-3 sm:py-4 h-12 sm:h-14"
         />
 
         {/* Voice recording button inside input - responsive positioning */}
@@ -47,7 +47,7 @@ export function MessageInput({
       <Button
         onClick={onSend}
         disabled={!value.trim()}
-        className="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-8 h-8 sm:w-10 sm:h-10 p-0 flex-shrink-0"
+        className="bg-[#1b5858] hover:bg-[#237070]  text-white rounded-full w-8 h-8 sm:w-10 sm:h-10 p-0 flex-shrink-0 cursor-pointer"
       >
         <Send className="w-3 h-3 sm:w-4 sm:h-4" />
       </Button>

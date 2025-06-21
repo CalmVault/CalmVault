@@ -16,7 +16,7 @@ interface Message {
 interface MessagesListProps {
   messages: Message[];
   onReply: (message: Message) => void;
-  messagesEndRef: React.RefObject<HTMLDivElement>;
+  messagesEndRef: React.RefObject<HTMLDivElement | null>;
 }
 
 export function MessagesList({

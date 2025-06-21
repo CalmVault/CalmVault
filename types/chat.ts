@@ -1,4 +1,3 @@
-import type React from "react";
 // Centralized type definitions for the chat application
 
 export interface Message {
@@ -36,11 +35,11 @@ export interface ChatInterfaceProps {
   onBack: () => void;
 }
 
-export interface MessagesListProps {
-  messages: Message[];
-  onReply: (message: Message) => void;
-  messagesEndRef: React.RefObject<HTMLDivElement | null>;
-}
+// export interface MessagesListProps {
+//   messages: Message[];
+//   onReply: (message: Message) => void;
+//   messagesEndRef: React.RefObject<HTMLDivElement | null>;
+// }
 
 export interface MessageBubbleProps {
   message: Message;

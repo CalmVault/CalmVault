@@ -84,7 +84,7 @@ export function ChatInterface({ sessionData, onBack }: ChatInterfaceProps) {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-900">
+    <div className="flex flex-col h-screen bg-[#2a2a2a]">
       {/* Fixed header section */}
       <div className="flex-shrink-0">
         <ChatHeader onBack={onBack} />
@@ -101,14 +101,14 @@ export function ChatInterface({ sessionData, onBack }: ChatInterfaceProps) {
 
       {/* Reply preview bar */}
       {replyingTo && (
-        <div className="flex-shrink-0 px-3 sm:px-4 py-2 bg-gray-800 border-t border-gray-700">
-          <div className="flex items-center justify-between bg-gray-700 rounded p-2">
+        <div className="flex-shrink-0 px-3 sm:px-4 py-2 bg-[#1b5858] border-t border-gray-700">
+          <div className="flex items-center justify-between bg-[#272727] rounded p-2">
             <div className="flex-1 min-w-0">
               <p className="text-xs text-gray-400">
                 Replying to{" "}
                 {replyingTo.sender === "therapist" ? "Amazing Listener" : "You"}
               </p>
-              <p className="text-sm text-gray-200 truncate">
+              <p className="text-sm text-gray-200 truncate ">
                 {replyingTo.type === "voice"
                   ? "🎵 Voice message"
                   : replyingTo.content}
@@ -125,7 +125,7 @@ export function ChatInterface({ sessionData, onBack }: ChatInterfaceProps) {
       )}
 
       {/* Input section */}
-      <div className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-700">
+      <div className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-100 ">
         {isRecording ? (
           <VoiceRecording
             onVoiceMessage={handleVoiceMessage}

@@ -27,7 +27,7 @@ export default function TherapistChatPage() {
   };
 
   return (
-    <div className="h-screen bg-gray-900">
+    <div className="h-screen">
       {/* Conditional rendering based on current view */}
       {currentView === "grid" ? (
         <SessionGrid onViewChat={handleViewChat} />

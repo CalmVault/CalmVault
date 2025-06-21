@@ -16,14 +16,14 @@ export function ChatHeader({ onBack }: ChatHeaderProps) {
   );
 
   return (
-    <div className="bg-gray-800 p-4 flex items-center justify-between border-b border-gray-700">
+    <div className="bg-[#555555] p-4 flex items-center justify-between border-b border-gray-100 ">
       {/* Left section: back button and therapist info */}
       <div className="flex items-center space-x-3">
         <Button
           variant="ghost"
           size="icon"
           onClick={onBack}
-          className="text-gray-400 hover:text-white"
+          className="text-gray-400 hover:text-white hover:bg-[#237070] cursor-pointer"
         >
           <ArrowLeft className="w-5 h-5" />
         </Button>
@@ -46,14 +46,14 @@ export function ChatHeader({ onBack }: ChatHeaderProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="text-gray-400 hover:text-white"
+          className="text-gray-400 hover:text-white hover:bg-[#237070] cursor-pointer"
         >
           <Phone className="w-5 h-5" />
         </Button>
         <Button
           variant="ghost"
           size="icon"
-          className="text-gray-400 hover:text-white"
+          className="text-gray-400 hover:text-white hover:bg-[#237070] cursor-pointer"
         >
           <MoreVertical className="w-5 h-5" />
         </Button>

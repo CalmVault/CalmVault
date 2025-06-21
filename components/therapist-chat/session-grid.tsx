@@ -257,7 +257,7 @@ const sessionData: SessionData[] = [
 // Session grid with vertical scrolling capability
 export function SessionGrid({ onViewChat }: SessionGridProps) {
   return (
-    <div className="h-screen bg-gray-900 flex flex-col">
+    <div className="h-screen bg-[#272727] flex flex-col">
       {/* Header section - fixed at top */}
       <div className="flex-shrink-0 p-6 border-b border-gray-700">
         <h1 className="text-2xl font-bold text-white mb-2">Therapy Sessions</h1>
@@ -290,11 +290,13 @@ export function SessionGrid({ onViewChat }: SessionGridProps) {
 // Session card with consistent height and proper button positioning
 function SessionCard({ session, onViewMore }: SessionCardProps) {
   return (
-    <Card className="bg-gray-800 border-gray-700 p-6 flex flex-col h-[400px] hover:bg-gray-750 transition-colors duration-200">
+    <Card className="bg-[#3b3b3b] border-gray-400 p-6 flex flex-col h-[400px] hover:bg-gray-750 transition-colors duration-200">
       {/* Session header */}
       <div className="flex items-center justify-between ">
-        <h3 className="text-white font-medium">Anonymous ID : {session.id}</h3>
-        <span className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">
+        <h3 className="text-white font-medium text-xl">
+          Anonymous ID : {session.id}
+        </h3>
+        <span className="bg-[#5f5f5f] text-gray-300 px-2 py-1  text-xs rounded-xl">
           Messaging only
         </span>
       </div>
@@ -322,12 +324,12 @@ function SessionCard({ session, onViewMore }: SessionCardProps) {
         </div>
 
         {/* Last message preview */}
-        <div className="mt-3 p-3 bg-gray-700/50 rounded">
-          <p className="text-gray-400 text-xs mb-1">Last message:</p>
+        <div className="mt-3 p-3 bg-[#5f5f5f] rounded-lg">
+          <p className="text-gray-300  text-xs mb-1">Last message:</p>
           <p className="text-gray-300 text-sm line-clamp-2">
             &quot;{session.lastMessage}&quot;
           </p>
-          <p className="text-gray-500 text-xs mt-2">
+          <p className="text-gray-300  text-xs mt-2">
             {session.lastMessageTime}
           </p>
         </div>
@@ -336,7 +338,7 @@ function SessionCard({ session, onViewMore }: SessionCardProps) {
       {/* View More button - always at bottom */}
       <Button
         onClick={onViewMore}
-        className="w-full bg-gray-700 hover:bg-gray-600 text-white mt-auto transition-colors duration-200"
+        className="w-full bg-[#5f5f5f] hover:bg-[#757575] border border-[#EDEDEDB2] text-white mt-auto transition-colors duration-200 cursor-pointer"
       >
         View More
       </Button>
