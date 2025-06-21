@@ -13,9 +13,7 @@ export function ChatInterface({ sessionData, onBack }: ChatInterfaceProps) {
   );
   const [newMessage, setNewMessage] = useState("");
   const [isRecording, setIsRecording] = useState(false);
-  const [recordingTime, setRecordingTime] = useState(0);
   const [replyingTo, setReplyingTo] = useState<Message | null>(null);
-  // Fixed ref type to allow null values
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   // Auto-scroll to latest message when new messages arrive
@@ -45,6 +43,11 @@ export function ChatInterface({ sessionData, onBack }: ChatInterfaceProps) {
 
   // Add voice message to chat and reset recording state
   const handleVoiceMessage = (audioUrl: string, duration: number) => {
+    console.log("💬 Adding voice message:", {
+      duration,
+      audioUrl: audioUrl.substring(0, 50) + "...",
+    });
+
     const voiceMessage: Message = {
       id: Date.now().toString(),
       type: "voice",
@@ -57,10 +60,10 @@ export function ChatInterface({ sessionData, onBack }: ChatInterfaceProps) {
       duration,
       replyTo: replyingTo?.id,
     };
+
     setMessages((prev) => [...prev, voiceMessage]);
     setReplyingTo(null);
     setIsRecording(false);
-    setRecordingTime(0);
   };
 
   // Set message to reply to
@@ -68,10 +71,16 @@ export function ChatInterface({ sessionData, onBack }: ChatInterfaceProps) {
     setReplyingTo(message);
   };
 
-  // Cancel voice recording without sending
+  // Cancel voice recording
   const handleCancelRecording = () => {
+    console.log("❌ Voice recording cancelled");
     setIsRecording(false);
-    setRecordingTime(0);
+  };
+
+  // Start recording
+  const handleStartRecording = () => {
+    console.log("🎤 Starting voice recording");
+    setIsRecording(true);
   };
 
   return (
@@ -90,7 +99,7 @@ export function ChatInterface({ sessionData, onBack }: ChatInterfaceProps) {
         />
       </div>
 
-      {/* Reply preview bar - responsive padding */}
+      {/* Reply preview bar */}
       {replyingTo && (
         <div className="flex-shrink-0 px-3 sm:px-4 py-2 bg-gray-800 border-t border-gray-700">
           <div className="flex items-center justify-between bg-gray-700 rounded p-2">
@@ -115,12 +124,10 @@ export function ChatInterface({ sessionData, onBack }: ChatInterfaceProps) {
         </div>
       )}
 
-      {/* Fixed input section - responsive padding */}
+      {/* Input section */}
       <div className="flex-shrink-0 p-3 sm:p-4 border-t border-gray-700">
         {isRecording ? (
           <VoiceRecording
-            recordingTime={recordingTime}
-            setRecordingTime={setRecordingTime}
             onVoiceMessage={handleVoiceMessage}
             onCancel={handleCancelRecording}
           />
@@ -129,7 +136,7 @@ export function ChatInterface({ sessionData, onBack }: ChatInterfaceProps) {
             value={newMessage}
             onChange={setNewMessage}
             onSend={handleSendMessage}
-            onStartRecording={() => setIsRecording(true)}
+            onStartRecording={handleStartRecording}
           />
         )}
       </div>

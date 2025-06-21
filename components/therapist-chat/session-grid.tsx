@@ -17,7 +17,6 @@ const sessionData: SessionData[] = [
     feedback: "4.8 / 5.0",
     verified: true,
     sessions: [
-      { date: "2025-04-09", duration: "50 mins", topic: "Stress Management" },
       { date: "2025-04-16", duration: "45 mins", topic: "Anxiety Check-in" },
     ],
     messages: [
@@ -118,7 +117,6 @@ const sessionData: SessionData[] = [
     verified: true,
     sessions: [
       { date: "2025-04-03", duration: "50 mins", topic: "Addiction Recovery" },
-      { date: "2025-04-10", duration: "45 mins", topic: "Trauma" },
     ],
     messages: [
       {
@@ -144,11 +142,6 @@ const sessionData: SessionData[] = [
     feedback: "4.8 / 5.0",
     verified: true,
     sessions: [
-      {
-        date: "2025-04-02",
-        duration: "50 mins",
-        topic: "Grief and Loss Support",
-      },
       { date: "2025-04-09", duration: "45 mins", topic: "Coping Strategies" },
     ],
     messages: [
@@ -175,7 +168,6 @@ const sessionData: SessionData[] = [
     feedback: "4.9 / 5.0",
     verified: true,
     sessions: [
-      { date: "2025-04-01", duration: "50 mins", topic: "Counseling" },
       {
         date: "2025-04-08",
         duration: "45 mins",
@@ -233,7 +225,6 @@ const sessionData: SessionData[] = [
     feedback: "4.9 / 5.0",
     verified: true,
     sessions: [
-      { date: "2025-03-25", duration: "55 mins", topic: "Family Therapy" },
       {
         date: "2025-04-01",
         duration: "50 mins",
@@ -278,7 +269,7 @@ export function SessionGrid({ onViewChat }: SessionGridProps) {
       {/* Scrollable content area */}
       <div className="flex-1 overflow-y-auto">
         <div className="container mx-auto p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {sessionData.map((session) => (
               <SessionCard
                 key={session.id}
@@ -301,7 +292,7 @@ function SessionCard({ session, onViewMore }: SessionCardProps) {
   return (
     <Card className="bg-gray-800 border-gray-700 p-6 flex flex-col h-[400px] hover:bg-gray-750 transition-colors duration-200">
       {/* Session header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between ">
         <h3 className="text-white font-medium">Anonymous ID : {session.id}</h3>
         <span className="bg-gray-700 text-gray-300 px-2 py-1 rounded text-xs">
           Messaging only
@@ -309,7 +300,7 @@ function SessionCard({ session, onViewMore }: SessionCardProps) {
       </div>
 
       {/* Feedback rating */}
-      <div className="flex items-center space-x-2 mb-4">
+      <div className="flex items-center space-x-2 ">
         <Star className="w-4 h-4 text-yellow-400 fill-current" />
         <span className="text-gray-300 text-sm">
           Feedback: {session.feedback} - Verified

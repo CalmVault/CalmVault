@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Play, Pause, Reply } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { MessageBubbleProps } from "@/types/chat";
+import type { MessageBubbleProps } from "@/types/chat";
 
 export function MessageBubble({
   message,
@@ -12,19 +12,83 @@ export function MessageBubble({
 }: MessageBubbleProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [audioDuration, setAudioDuration] = useState(0);
   const [showReplyButton, setShowReplyButton] = useState(false);
+  const [audioError, setAudioError] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const isUser = message.sender === "user";
 
+  // Load audio metadata when component mounts
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || message.type !== "voice") return;
+
+    const handleLoadedMetadata = () => {
+      const duration = audio.duration;
+      if (isFinite(duration) && duration > 0) {
+        setAudioDuration(duration);
+        setAudioError(false);
+        console.log("Audio duration loaded:", duration);
+      } else {
+        // Fallback to message duration if metadata not available
+        setAudioDuration(message.duration || 5);
+      }
+    };
+
+    const handleCanPlay = () => {
+      console.log("Audio can play");
+      setAudioError(false);
+    };
+
+    const handleError = (e: Event) => {
+      console.error("Audio loading error:", e);
+      setAudioError(true);
+      setAudioDuration(message.duration || 5); // Use fallback duration
+    };
+
+    const handleLoadStart = () => {
+      console.log("Audio load started");
+      setAudioError(false);
+    };
+
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("canplay", handleCanPlay);
+    audio.addEventListener("error", handleError);
+    audio.addEventListener("loadstart", handleLoadStart);
+
+    // Force load metadata
+    if (message.content) {
+      audio.load();
+    }
+
+    return () => {
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("canplay", handleCanPlay);
+      audio.removeEventListener("error", handleError);
+      audio.removeEventListener("loadstart", handleLoadStart);
+    };
+  }, [message.content, message.duration, message.type]);
+
   // Toggle audio playback state
   const handlePlayVoice = () => {
+    if (audioError) {
+      console.log("Cannot play audio due to error");
+      return;
+    }
+
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
       } else {
-        audioRef.current.play();
+        // Reset to beginning if at end
+        if (currentTime >= audioDuration) {
+          audioRef.current.currentTime = 0;
+        }
+        audioRef.current.play().catch((error) => {
+          console.error("Error playing audio:", error);
+          setAudioError(true);
+        });
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -33,26 +97,45 @@ export function MessageBubble({
     const audio = audioRef.current;
     if (!audio) return;
 
-    const updateTime = () => setCurrentTime(audio.currentTime);
+    const updateTime = () => {
+      setCurrentTime(audio.currentTime);
+    };
+
     const handleEnded = () => {
       setIsPlaying(false);
       setCurrentTime(0);
+      console.log("Audio playback ended");
     };
-    const handlePause = () => setIsPlaying(false);
-    const handlePlay = () => setIsPlaying(true);
+
+    const handlePause = () => {
+      setIsPlaying(false);
+    };
+
+    const handlePlay = () => {
+      setIsPlaying(true);
+      setAudioError(false);
+    };
+
+    const handleError = (e: Event) => {
+      console.error("Audio playback error:", e);
+      setIsPlaying(false);
+      setAudioError(true);
+    };
 
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("ended", handleEnded);
     audio.addEventListener("pause", handlePause);
     audio.addEventListener("play", handlePlay);
+    audio.addEventListener("error", handleError);
 
     return () => {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("ended", handleEnded);
       audio.removeEventListener("pause", handlePause);
       audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("error", handleError);
     };
-  }, []);
+  }, [audioDuration]);
 
   // Convert seconds to MM:SS format
   const formatTime = (seconds: number) => {
@@ -63,9 +146,15 @@ export function MessageBubble({
 
   // Calculate remaining playback time for countdown
   const getRemainingTime = () => {
-    const duration = message.duration || 5;
+    const duration = audioDuration || message.duration || 5;
     const remaining = Math.max(0, duration - currentTime);
     return formatTime(remaining);
+  };
+
+  // Get total duration for display
+  const getTotalDuration = () => {
+    const duration = audioDuration || message.duration || 5;
+    return formatTime(duration);
   };
 
   // Therapist profile avatar component
@@ -125,7 +214,9 @@ export function MessageBubble({
                   : "bg-gray-700 text-gray-100 rounded-bl-sm"
               }`}
             >
-              <p className="text-sm leading-relaxed">{message.content}</p>
+              <p className="text-sm leading-relaxed break-words overflow-wrap-anywhere">
+                {message.content}
+              </p>
             </div>
           ) : (
             <div
@@ -141,9 +232,14 @@ export function MessageBubble({
                   variant="ghost"
                   size="icon"
                   onClick={handlePlayVoice}
-                  className="w-8 h-8 p-0 hover:bg-white/10 rounded-full"
+                  disabled={audioError}
+                  className={`w-8 h-8 p-0 hover:bg-white/10 rounded-full ${
+                    audioError ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
                 >
-                  {isPlaying ? (
+                  {audioError ? (
+                    <span className="text-xs">❌</span>
+                  ) : isPlaying ? (
                     <Pause className="w-4 h-4" />
                   ) : (
                     <Play className="w-4 h-4" />
@@ -158,7 +254,7 @@ export function MessageBubble({
                     <div
                       key={i}
                       className={`w-1 bg-current rounded-full transition-all duration-150 ${
-                        isPlaying ? "animate-pulse" : ""
+                        isPlaying && !audioError ? "animate-pulse" : ""
                       }`}
                       style={{
                         height: `${Math.random() * 16 + 8}px`,
@@ -171,14 +267,28 @@ export function MessageBubble({
                 {/* Countdown timer display */}
                 <div className="text-center">
                   <span className="text-xs opacity-70 font-mono inline-block w-12">
-                    {isPlaying
-                      ? getRemainingTime()
-                      : formatTime(message.duration || 5)}
+                    {audioError
+                      ? "Error"
+                      : isPlaying
+                        ? getRemainingTime()
+                        : getTotalDuration()}
                   </span>
                 </div>
               </div>
 
-              <audio ref={audioRef} src={message.content} preload="metadata" />
+              {/* Audio element with proper source handling */}
+              {message.content && !audioError && (
+                <audio
+                  ref={audioRef}
+                  preload="metadata"
+                  style={{ display: "none" }}
+                >
+                  <source src={message.content} type="audio/wav" />
+                  <source src={message.content} type="audio/webm" />
+                  <source src={message.content} type="audio/mp4" />
+                  Your browser does not support the audio element.
+                </audio>
+              )}
             </div>
           )}
 

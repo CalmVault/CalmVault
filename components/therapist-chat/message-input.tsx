@@ -4,7 +4,7 @@ import type React from "react";
 import { Mic, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MessageInputProps } from "@/types/chat";
+import type { MessageInputProps } from "@/types/chat";
 
 export function MessageInput({
   value,
@@ -29,7 +29,7 @@ export function MessageInput({
           onChange={(e) => onChange(e.target.value)}
           onKeyPress={handleKeyPress}
           placeholder="Your Message"
-          className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 pr-10 sm:pr-12 rounded-full text-sm sm:text-base py-2 sm:py-3"
+          className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 pr-10 sm:pr-12 rounded-2xl text-sm sm:text-base py-3 sm:py-4 h-12 sm:h-14"
         />
 
         {/* Voice recording button inside input - responsive positioning */}

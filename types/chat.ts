@@ -65,8 +65,6 @@ export interface MessageInputProps {
 }
 
 export interface VoiceRecordingProps {
-  recordingTime: number;
-  setRecordingTime: (time: number) => void;
   onVoiceMessage: (audioUrl: string, duration: number) => void;
   onCancel: () => void;
 }
