@@ -444,7 +444,7 @@ export function VoiceRecording({
   };
 
   return (
-    <div className="flex items-center justify-between p-3 sm:p-4 bg-gray-800 rounded-lg gap-2 sm:gap-4">
+    <div className="flex items-center justify-between p-3 sm:p-4 bg-[#263636] rounded-lg gap-2 sm:gap-4">
       {/* Cancel button */}
       <Button
         variant="ghost"
@@ -528,7 +528,7 @@ export function VoiceRecording({
       <Button
         onClick={handleSend}
         disabled={recordingState !== "recording" || recordingTime < 1}
-        className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-full flex-shrink-0 px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base"
+        className="bg-[#1b5858] hover:bg-[#237070] disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-full flex-shrink-0 px-3 py-2 sm:px-4 sm:py-2 text-sm sm:text-base"
       >
         <span className="hidden sm:inline">Send</span>
         <span className="sm:hidden">→</span>

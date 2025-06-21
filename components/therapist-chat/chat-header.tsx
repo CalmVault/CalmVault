@@ -3,15 +3,21 @@
 import { ArrowLeft, Phone, MoreVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChatHeaderProps } from "@/types/chat";
+import Image from "next/image";
 
 // Chat header component - sessionData removed as it wasn't being used
 export function ChatHeader({ onBack }: ChatHeaderProps) {
   // Therapist profile logo component
   const TherapistLogo = () => (
-    <div className="w-10 h-10 bg-teal-600 rounded-full flex items-center justify-center">
-      <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
-        <div className="w-4 h-4 bg-teal-600 rounded-full"></div>
-      </div>
+    <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200">
+      <Image
+        src="/therapist.svg"
+        alt="Amazing Listener Profile"
+        width={40}
+        height={40}
+        className="w-full h-full object-cover"
+        priority
+      />
     </div>
   );
 

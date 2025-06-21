@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Play, Pause, Reply } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { MessageBubbleProps } from "@/types/chat";
+import Image from "next/image";
 
 export function MessageBubble({
   message,
@@ -159,10 +160,15 @@ export function MessageBubble({
 
   // Therapist profile avatar component
   const TherapistLogo = () => (
-    <div className="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center flex-shrink-0">
-      <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-        <div className="w-3 h-3 bg-teal-600 rounded-full"></div>
-      </div>
+    <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0 bg-gray-200">
+      <Image
+        src="/therapist.svg"
+        alt="Therapist Profile"
+        width={32}
+        height={32}
+        className="w-full h-full object-cover"
+        priority
+      />
     </div>
   );
 
@@ -222,7 +228,7 @@ export function MessageBubble({
             <div
               className={`p-3 rounded-lg flex items-center space-x-3 w-64 ${
                 isUser
-                  ? "bg-blue-600 text-white rounded-br-sm"
+                  ? "bg-[#263636] text-white rounded-br-sm"
                   : "bg-gray-700 text-gray-100 rounded-bl-sm"
               }`}
             >

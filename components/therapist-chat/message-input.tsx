@@ -37,7 +37,7 @@ export function MessageInput({
           variant="ghost"
           size="icon"
           onClick={onStartRecording}
-          className="absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white w-8 h-8 sm:w-10 sm:h-10"
+          className="absolute right-1 sm:right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white hover:bg-[#237070] w-8 h-8 sm:w-10 sm:h-10"
         >
           <Mic className="w-3 h-3 sm:w-4 sm:h-4" />
         </Button>
