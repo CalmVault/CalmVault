@@ -1,5 +1,11 @@
+import DaoPage from "./components/DaoPage";
+
 function page() {
-  return <div>page</div>;
+  return (
+    <div>
+      <DaoPage />
+    </div>
+  );
 }
 
 export default page;
