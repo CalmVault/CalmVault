@@ -48,7 +48,7 @@ const sideBarLinks = [
     icon: "/rep-score-icon.png",
     activeIcon: "/rep-score-active-icon.png",
     title: "Reputation score",
-    routePath: "/reputation-score",
+    routePath: "/therapist-reputation-score",
   },
   {
     icon: "/calendar-icon.svg",
