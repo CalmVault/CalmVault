@@ -2,10 +2,10 @@
 
 import Faq from '@/components/user/therapy-hub/faq'
 import React from 'react'
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 
 export default function Page() {
-    const router = useRouter();
+    // const router = useRouter();
   
   return (
     <Faq />
