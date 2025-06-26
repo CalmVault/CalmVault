@@ -1,23 +1,27 @@
-//this is a component for the DAO governance page where I made changes.
+import Image from "next/image";
 
 const DaoPage = () => {
   return (
     <div className="text-white bg-[#000]  h-[calc(100vh-1rem)] w-full flex items-center justify-center">
       <div className="bg-[#EDEDED1A] rounded-2xl px-6 py-7 w-fit-content mx-[1rem] ">
         <span className="flex gap-6 items-center  pt-2 pb-4">
-          <img
+          <Image
             className="w-[40px]"
             src="/dao-icons/dao_icon.svg"
             alt="DAO Icon"
+            width={40}
+            height={40}
           />
           <h2 className="font-[400] text-[26px]">DAO Governance</h2>
         </span>
 
         <span className="flex gap-2 items-center mb-[2rem]">
-          <img
+          <Image
             className="w-[]"
             src="/dao-icons/fluent-icon.svg"
             alt="DAO Icon"
+            width={17}
+            height={17}
           />
           <p>
             Participate in votes, suggest improvements and moderate disputes (If

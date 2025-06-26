@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import Header from "@/components/header"
-import TherapySessionSidebar from "../therapy-hub/alert-sidebar";
+import React from "react";
+// import Header from "@/components/header"
+// import TherapySessionSidebar from "../therapy-hub/alert-sidebar";
 import TherapistReputationScoreCard, { ReputationScoreCardProps } from "./therapist-reputation-score-card";
 
 
