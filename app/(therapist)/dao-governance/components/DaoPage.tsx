@@ -1,4 +1,4 @@
-// import HIcon from "../../../../public/dao-icons/dao_icon.svg"
+//this is a component for the DAO governance page where I made changes
 
 const DaoPage = () => {
   return (
