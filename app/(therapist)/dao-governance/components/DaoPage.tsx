@@ -1,4 +1,4 @@
-//this is a component for the DAO governance page where I made changes
+//this is a component for the DAO governance page where I made changes.
 
 const DaoPage = () => {
   return (
