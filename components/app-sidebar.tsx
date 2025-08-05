@@ -11,20 +11,46 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+const sideBarLinks = [
+  {
+    icon: "/physio-therapist.svg",
+    activeIcon: "/physio-therapist-active.svg",
+    title: "Theraphy Hub",
+    routePath: "/theraphy-hub",
+  },
+  {
+    icon: "/chat-icon.svg",
+    activeIcon: "/chat-active-icon.svg",
+    title: "Chats",
+    routePath: "/chats",
+  },
+  {
+    icon: "/calendar-icon.svg",
+    activeIcon: "/calendar-active-icon.svg",
+    title: "Calendar",
+    routePath: "/calendar",
+  },
+  {
+    icon: "/notification-icon.svg",
+    activeIcon: "/notification-active-icon.svg",
+    title: "Notification",
+    routePath: "/notification",
+  },
+  {
+    icon: "/settings-icon.svg",
+    activeIcon: "/settings-active-icon.svg",
+    title: "Settings",
+    routePath: "/settings",
+  },
+  {
+    icon: "/profile-icon.svg",
+    activeIcon: "/profile-active-icon.svg",
+    title: "Profile",
+    routePath: "/profile",
+  },
+];
 
-type SidebarLink = {
-  icon: string;
-  activeIcon: string;
-  title: string;
-  routePath: string;
-};
-
-
-interface AppSidebarProps {
-  sideBarLinks: SidebarLink[];
-}
-
-export function AppSidebar({ sideBarLinks }: AppSidebarProps) {
+export function AppSidebar() {
   const route = useRouter();
   const pathname = usePathname();
   const [activeItem, setActiveItem] = useState("");
@@ -39,23 +65,21 @@ export function AppSidebar({ sideBarLinks }: AppSidebarProps) {
     if (current) {
       setActiveItem(current.title);
     }
-  }, [pathname, sideBarLinks]);
+  }, [pathname]);
 
   return (
-    <Sidebar className=" py-16 px-6 relative">
+    <Sidebar className="py-16 px-6 relative">
       <SidebarHeader>
         <Image src={"/logo-with-text.svg"} width={168} height={45} alt="logo" />
       </SidebarHeader>
-      <SidebarContent className="w-full  flex flex-col gap-6 mt-12 px-4">
+      <SidebarContent className="w-full flex flex-col gap-6 mt-12 px-4">
         <SidebarGroup>
           {sideBarLinks.map(({ title, icon, routePath, activeIcon }, index) => {
             const isActive = activeItem === title;
             return (
               <div
                 key={index}
-                onClick={() => {
-                  route.push(routePath);
-                }}
+                onClick={() => route.push(routePath)}
                 className="w-full cursor-pointer mb-6"
               >
                 <Image
@@ -67,7 +91,7 @@ export function AppSidebar({ sideBarLinks }: AppSidebarProps) {
                 <p
                   className={`text-sm font-normal mt-1.5 ${
                     isActive ? "text-[#00A6A6]" : "text-white"
-                  } cursor-pointer `}
+                  } cursor-pointer`}
                 >
                   {title}
                 </p>
@@ -76,8 +100,8 @@ export function AppSidebar({ sideBarLinks }: AppSidebarProps) {
           })}
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className=" my-6 px-12  absolute bottom-0 w-full left-0">
-        <LogOut color="#EDEDED" className=" rotate-180" size={20} />
+      <SidebarFooter className="my-6 px-12 absolute bottom-0 w-full left-0">
+        <LogOut color="#EDEDED" className="rotate-180" size={20} />
         <p className="mt-1 text-sm text-[#EDEDED]">Log out</p>
       </SidebarFooter>
     </Sidebar>
